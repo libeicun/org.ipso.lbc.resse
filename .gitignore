@@ -1,0 +1,7 @@
+target/
+.idea/artifacts/
+.idea/libraries/
+.idea/workspace.xml
+lib/
+doc/
+temp/
