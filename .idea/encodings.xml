@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/.idea" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/CONFIG/log.properties" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/LOG/debug.log" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/LOG/error.log" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/LOG/info.log" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/log.properties" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/login.jsp" charset="GB2312" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

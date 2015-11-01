@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ 版权所有 (c) 2015 。 李倍存 （iPso）。
+  ~ 所有者对该文件所包含的代码的正确性、执行效率等任何方面不作任何保证。
+  ~ 所有个人和组织均可不受约束地将该文件所包含的代码用于非商业用途。若需要将其用于商业软件的开发，请首先联系所有者以取得许可。
+  -->
+
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                  http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/integration
+                  http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+    <beans:bean id="configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="locations">
+            <beans:list>
+                <beans:value>classpath:mail.properties</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="mailMessage" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <!-- 查看SimpleMailMessage源码还可以注入标题,内容等 -->
+    </beans:bean>
+    <!-- 申明JavaMailSenderImpl对象 -->
+    <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <beans:property name="defaultEncoding" value="UTF-8"/>
+        <beans:property name="host" value="${mail.host}"/>
+        <beans:property name="username" value="${mail.username}"/>
+        <beans:property name="password" value="${mail.password}"/>
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <!-- 设置认证开关 -->
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+                <!-- 启动调试开关 -->
+                <beans:prop key="mail.debug">true</beans:prop>
+                <!-- 设置发送延时 -->
+                <beans:prop key="mail.smtp.timeout">5000</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+</beans:beans>
