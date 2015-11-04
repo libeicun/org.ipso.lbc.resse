@@ -54,8 +54,11 @@ public abstract class SecurityUtils {
         Subject subject = ThreadContext.getSubject();
         if (subject == null) {
             subject = (new Subject.Builder()).buildSubject();
+            System.out.println("Building new Subject.");
             ThreadContext.bind(subject);
         }
+
+
         return subject;
     }
 

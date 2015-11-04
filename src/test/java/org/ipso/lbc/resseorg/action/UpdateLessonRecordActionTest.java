@@ -13,7 +13,6 @@ public class UpdateLessonRecordActionTest {
     @org.junit.Test
     public void testExecute() throws Exception {
         UpdateLessonRecordAction action = new UpdateLessonRecordAction();
-        action.setName("李倍");
         action.setInfo("");
         action.setMinutes(0);
         action.setTimes(0);

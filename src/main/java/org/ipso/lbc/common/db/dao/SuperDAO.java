@@ -7,10 +7,7 @@
 
 package org.ipso.lbc.common.db.dao;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.ipso.lbc.common.db.eDbType;
 import org.ipso.lbc.common.utils.ResourcePathHelper;
@@ -187,5 +184,20 @@ public class SuperDAO {
             q.setParameter(i,params[i]);
         }
         return q.list();
+    }
+
+    public void update(String sql, Object ... params){
+        Session defaultSession = this.getSession();
+
+        Transaction t = defaultSession.beginTransaction();
+
+        SQLQuery query= defaultSession.createSQLQuery(sql);
+        for (int i = 0; i < params.length; i++) {
+            query.setParameter(i,params[i]);
+        }
+        query.executeUpdate();
+
+        t.commit();
+
     }
 }

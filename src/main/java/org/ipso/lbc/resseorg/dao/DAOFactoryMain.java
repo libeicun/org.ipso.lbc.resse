@@ -27,6 +27,12 @@ public class DAOFactoryMain {
     }
 
 
+    private SuperDAO superDAO;
+
+    public SuperDAO getSuperDAO() {
+        return superDAO;
+    }
+
     private DAOFactoryMain() {
         SuperDAO superDAO = SuperDAO.getInstanceOf(eDbType.MAIN);
 
@@ -34,6 +40,7 @@ public class DAOFactoryMain {
         daos.put("user-role",new DAOUserRole(superDAO));
         daos.put("student",new DAOStudent(superDAO));
         daos.put("lesson-record",new DAOLessonRecord(superDAO));
+        this.superDAO = superDAO;
     }
 
     private Map<String,Object> daos = new HashMap<String, Object>();

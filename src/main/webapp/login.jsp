@@ -3,8 +3,8 @@
 <head>
     <title>登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link rel="stylesheet" href="resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resource/css/bootstrap-theme.min.css">
     <style>
         body{padding-top:20px;}
     </style>
@@ -39,9 +39,9 @@
             </div>
         </div>
     </div>
-    <script src="jquery.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="html5shiv.js"></script>
-    <script src="respond.min.js"></script>
+    <script src="resource/js/jquery.js"></script>
+    <script src="resource/js/bootstrap.min.js"></script>
+    <script src="resource/js/html5shiv.js"></script>
+    <script src="resource/js/respond.min.js"></script>
 </body>
 </html>
