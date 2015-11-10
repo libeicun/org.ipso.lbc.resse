@@ -25,6 +25,7 @@ import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -104,6 +105,8 @@ public abstract class AuthorizationFilter extends AccessControlFilter {
      * @throws IOException if there is any servlet error.
      */
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
+
+        System.out.println("    "+((HttpServletRequest)request).getRequestURL() + " authorization access DENIED.");
 
         Subject subject = getSubject(request, response);
         // If the subject isn't identified, redirect to login URL

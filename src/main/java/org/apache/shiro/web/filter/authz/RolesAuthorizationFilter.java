@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.Set;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.CollectionUtils;
@@ -45,10 +46,13 @@ public class RolesAuthorizationFilter extends AuthorizationFilter {
 
         if (rolesArray == null || rolesArray.length == 0) {
             //no roles specified, so nothing to check - allow access.
+            System.out.println("    "+((HttpServletRequest)request).getRequestURL() + " [roles] authorization access IN.");
             return true;
         }
-
         Set<String> roles = CollectionUtils.asSet(rolesArray);
+        if(subject.hasAllRoles(roles)){
+            System.out.println("    "+((HttpServletRequest)request).getRequestURL() + " [roles] authorization access IN.");
+        }
         return subject.hasAllRoles(roles);
     }
 

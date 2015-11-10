@@ -17,10 +17,11 @@ public class UserTest {
 
     @Test
     public void testSetPassword() throws Exception {
-        DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
-        daoUser.insertOrUpdate(new User("admin","admin"));
-        UserUtils.setPassword(daoUser,"admin","admin");
-        daoUser.insertOrUpdate(new User("1512302009","lbc"));
-
+//        DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
+//        daoUser.insertOrUpdate(new User("admin","admin"));
+//        UserUtils.setPassword(daoUser,"admin","admin");
+//        daoUser.insertOrUpdate(new User("1512302009","lbc"));
+        User user = new User("guest","guest");
+        System.err.println(user.getPassword());
     }
 }

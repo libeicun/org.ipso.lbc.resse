@@ -15,6 +15,8 @@ import org.ipso.lbc.common.utils.ResourcePathHelper;
  */
 public class MyDataSource extends UcanaccessDataSource{
     public MyDataSource() {
+        setUser("");
+        setPassword("");
     }
 
     @Override

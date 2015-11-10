@@ -392,6 +392,13 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.py</include>
+                    <include>**/*.tld</include>
+                    <include>**/*.accdb</include>
+                </includes>
             </resource>
         </resources>
         <testResources>

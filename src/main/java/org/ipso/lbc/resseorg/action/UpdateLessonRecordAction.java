@@ -6,20 +6,15 @@
 
 package org.ipso.lbc.resseorg.action;
 
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ThreadContext;
-import org.apache.shiro.web.mgt.WebSecurityManager;
+import org.ipso.lbc.common.action.CommonAjaxAction;
 import org.ipso.lbc.common.dao.DAOStudent;
-import org.ipso.lbc.common.domain.Student;
+import org.ipso.lbc.common.exception.handler.ExceptionInfoPrintingHelper;
 import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
 import org.ipso.lbc.resseorg.dao.DAOLessonRecord;
 import org.ipso.lbc.resseorg.domain.LessonRecord;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,16 +22,39 @@ import java.util.Date;
  * 信息：李倍存 创建于 2015/10/24 21:24。电邮 1174751315@qq.com。<br>
  * 说明：
  */
-public class UpdateLessonRecordAction extends ActionSupport {
+public class UpdateLessonRecordAction extends CommonAjaxAction {
 
 
     public UpdateLessonRecordAction() {
     }
 
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
+    private String warning="OK";
+    @Override
+    protected void setWarningInfo(String info) {
+        warning = info;
+    }
+
     private Integer minutes;
     private Integer times;
-    private String id = "未指定";
-    private String name;
+    private String id = "UNSPECIFIED";
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name = "UNSPECIFIED";
     private String info = "";
 
     public String getInfo() {
@@ -56,23 +74,7 @@ public class UpdateLessonRecordAction extends ActionSupport {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getWarning() {
-        return warning;
-    }
-
-    public void setWarning(String warning) {
-        this.warning = warning;
-    }
-
-    private String warning="OK";
 
     public Integer getMinutes() {
         return minutes;
@@ -91,26 +93,32 @@ public class UpdateLessonRecordAction extends ActionSupport {
     }
 
 
-    private String warn(String info){
-        warning = info;
-        return SUCCESS;
-    }
+
 
     @Override
     public String execute() throws Exception {
 
+
         try {
-//            DAOStudent daoStudent = DAOFactoryMain.getInstance().getDaoStudent();
+
+            DAOStudent daoStudent = DAOFactoryMain.getInstance().getDaoStudent();
             DAOLessonRecord daoLessonRecord = DAOFactoryMain.getInstance().getDaoLessonRecord();
 
+            Subject user = SecurityUtils.getSubject();
+            String name;
+            if (user.isAuthenticated()){
+                name = daoStudent.query(user.getPrincipal().toString()).getStudentName();
+            } else {
+                name = this.name;
+            }
             LessonRecord currentRecord = daoLessonRecord.queryByStudentName(name);
             if (currentRecord == null){
                 return warn("没有找到您的姓名，请联系纪委同学。");
             }
-//            Subject user = SecurityUtils.getSubject();
-//            Boolean isAdm = user.hasRole("adm");
-//            Boolean isUser = user.hasRole("user");
+
+
 //            Student currentStudent = daoStudent.query(id);
+
 
 
 
@@ -133,7 +141,7 @@ public class UpdateLessonRecordAction extends ActionSupport {
 //
             return SUCCESS;
         } catch (Exception e) {
-            return warn("服务器软件发生未知错误，请联系李倍存。");
+            return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
         }
     }
 }

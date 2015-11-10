@@ -24,6 +24,7 @@ import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Base class for all Filters that require the current user to be authenticated. This class encapsulates the
@@ -78,6 +79,10 @@ public abstract class AuthenticationFilter extends AccessControlFilter {
      */
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         Subject subject = getSubject(request, response);
+
+        System.out.println("    "+((HttpServletRequest)request).getRequestURL() + " authentication access " + (subject.isAuthenticated() ? "IN." : "DENIED."));
+
+
         return subject.isAuthenticated();
     }
 

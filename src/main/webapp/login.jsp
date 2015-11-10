@@ -3,8 +3,8 @@
 <head>
     <title>登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link rel="stylesheet" href="resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resource/css/bootstrap-theme.min.css">
     <style>
         body{padding-top:20px;}
     </style>
@@ -15,7 +15,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" align="center">
-                        <h3 class="panel-title">登录</h3>
+                        <h3 class="panel-title"></h3>
                     </div>
                     <div class="panel-body">
                         <form name="loginform" action="" method="POST" accept-charset="UTF-8" role="form">
@@ -31,7 +31,8 @@
                                         <input name="rememberMe" type="checkbox" value="true"> 记住我
                                     </label>
                                 </div>
-                                <input class="btn btn-lg btn-success btn-block" type="submit" value="提交">
+                                <input class="btn btn-lg btn-success btn-block" type="submit" value="登录">
+                                <div style="width: 100%;text-align: center"><a href="index.jsp">以游客身份访问</a></div>
                             </fieldset>
                         </form>
                     </div>
@@ -39,9 +40,9 @@
             </div>
         </div>
     </div>
-    <script src="jquery.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="html5shiv.js"></script>
-    <script src="respond.min.js"></script>
+    <script src="resource/js/jquery.js"></script>
+    <script src="resource/js/bootstrap.min.js"></script>
+    <script src="resource/js/html5shiv.js"></script>
+    <script src="resource/js/respond.min.js"></script>
 </body>
 </html>
