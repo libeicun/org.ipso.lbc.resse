@@ -8,13 +8,14 @@ package org.ipso.lbc.common.dao;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.ipso.lbc.common.adm.User;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
 import static org.junit.Assert.*;
 
 public class DAOUserTest {
 
-    DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
+    DAOUser daoUser = DAOFactoryLocal.getInstance().getDaoUser();
 
     @org.junit.Test
     public void testInsertOrUpdate() throws Exception {

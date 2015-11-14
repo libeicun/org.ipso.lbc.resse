@@ -15,15 +15,20 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login.jsp"/>
-        <property name="successUrl" value="/index.jsp"/>
+        <property name="successUrl" value="/"/>
+        <property name="unauthorizedUrl" value="/unauthorized.jsp"/>
+        <property name="filters">
+            <map>
+                <entry key="myLogout" value-ref="myLogoutFilter"/>
+            </map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
                 /logout = logout
-                /adm_home.jsp = authc
-                /index.jsp = authc
-                / =authc
-                /resse-1.0 =authc
-                /** = authc
+                /adm_home.jsp = authc, roles[adm]
+                /ajax_use_json/* = anon
+                /login.jsp = authc
+                /apps/* = anon
             </value>
         </property>
     </bean>
@@ -31,12 +36,15 @@
         <property name="realm" ref="myJdbcRealm"/>
         <property name="cacheManager" ref="cacheManager"/>
         <property name="sessionManager" ref="sessionManager"/>
+        <property name="sessionMode" value="native"/>
+
     </bean>
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <property name="globalSessionTimeout" value="3600000"/>
-        <property name="sessionIdCookieEnabled" value="false"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -44,20 +52,23 @@
     <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.MemorySessionDAO"/>
 
 
-    <bean id="myIniRealm" class="org.apache.shiro.realm.text.IniRealm">
-        <property name="name" value="myRealm"/>
-        <property name="resourcePath">
-            <value>classpath:CONFIG/users.ini</value>
-        </property>
+    <!--<bean id="myIniRealm" class="org.apache.shiro.realm.text.IniRealm">-->
+        <!--<property name="name" value="myRealm"/>-->
+        <!--<property name="resourcePath">-->
+            <!--<value>classpath:CONFIG/users.ini</value>-->
+        <!--</property>-->
+        <!--<property name="credentialsMatcher" ref="md5CredentialsMatcher"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="myJdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">-->
+        <!--<property name="name" value="JdbcRealm"/>-->
+        <!--<property name="dataSource" ref="accessDataSource"/>-->
+        <!--<property name="credentialsMatcher" ref="md5CredentialsMatcher"/>-->
+    <!--</bean>-->
+    <bean id="myJdbcRealm" class="org.ipso.lbc.common.shiro.MyJdbcRealmWithEmptyPasswordAndMd5">
+        <property name="name" value = "LBC"/>
         <property name="credentialsMatcher" ref="md5CredentialsMatcher"/>
     </bean>
-
-    <bean id="myJdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
-        <property name="name" value="JdbcRealm"/>
-        <property name="dataSource" ref="accessDataSource"/>
-        <property name="credentialsMatcher" ref="md5CredentialsMatcher"/>
-    </bean>
-
     <bean id="accessDataSource" class="org.ipso.lbc.common.ucanaccess.MyDataSource">
         <property name="accessPath">
             <value>classpath:DATA/main.accdb</value>
@@ -70,4 +81,9 @@
         <property name="hashAlgorithmName" value="MD5"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
     </bean>
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <property name="name" value="your.cookie"/>
+        <property name="path" value="/"/>
+    </bean>
+    <bean id="myLogoutFilter" class="org.ipso.lbc.common.shiro.LogoutFilterWithoutRedirect"/>
 </beans>

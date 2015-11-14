@@ -16,14 +16,12 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
     public User() {
-
+        this("","");
     }
 
     public User(String name, String password) {
-        this.password = password;
-        this.name = name;
-        updateMd5();
-
+        setName(name);
+        setPassword(password);
     }
 
     private String name;
@@ -48,6 +46,6 @@ public class User implements Serializable {
 
 
     private void updateMd5(){
-        this.password = new Md5Hash(this.password.toString()).toHex();
+        this.password = new Md5Hash(this.password).toHex();
     }
 }

@@ -20,6 +20,22 @@
         <action name="updateLessonRecord" class="org.ipso.lbc.resseorg.action.UpdateLessonRecordAction" method="execute">
             <result type="json"/>
         </action>
+        <action name="registerDayOff" class="org.ipso.lbc.resseorg.action.RegisterDayOffAction" method="execute">
+            <result type="json"/>
+        </action>
+        <action name="registerBusinessTrip" class="org.ipso.lbc.resseorg.action.RegisterBusinessTripAction" method="execute">
+            <result type="json"/>
+        </action>
+        <action name="changePassword" class="org.ipso.lbc.common.action.ChangePasswordAction" method="execute">
+            <result type="json">
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="registerGeneralInfo" class="org.ipso.lbc.common.action.GeneralInfoRegisterAction" method="execute">
+            <result type="json">
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
     </package>
     <package name="general" extends="struts-default" namespace="/general">
 

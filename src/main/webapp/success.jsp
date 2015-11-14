@@ -23,7 +23,7 @@
     <jsp:forward page="index.jsp"/>
 </shiro:hasRole>
 <shiro:hasRole name="adm">
-    <jsp:forward page="adm_home.jsp"/>
+    <jsp:forward page="adm/adm_home.jsp"/>
 </shiro:hasRole>
 </body>
 </html>
