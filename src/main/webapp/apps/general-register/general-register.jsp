@@ -22,7 +22,7 @@
     <script type="text/javascript">
         function doRegister() {
 
-            var url = '/resse-1.0/ajax_use_json/registerGeneralInfo.action';
+            var url = '/resse-1.1/ajax_use_json/registerGeneralInfo.action';
 
             var params = Form.serialize('register');
             var myAjax = new Ajax.Request(url,
