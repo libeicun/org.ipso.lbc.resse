@@ -6,15 +6,10 @@
 
 package org.ipso.lbc.resseorg.dao;
 
-import org.ipso.lbc.common.domain.Student;
-import org.ipso.lbc.resseorg.domain.LessonRecord;
-
-import static org.junit.Assert.*;
-
 public class DAOLessonRecordTest {
 
 
-    DAOLessonRecord daoLessonRecord = DAOFactoryMain.getInstance().getDaoLessonRecord();
+    DAOLessonRecord daoLessonRecord = DAOFactoryLocal.getInstance().getDaoLessonRecord();
 
     @org.junit.Test
     public void testInsertOrUpdate() throws Exception {

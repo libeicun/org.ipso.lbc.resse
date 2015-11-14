@@ -7,10 +7,9 @@
 package org.ipso.lbc.common.utils;
 
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.sql.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 /**
  * 李倍存 创建于 2015/2/19 20:20。电邮 1174751315@qq.com。
@@ -67,5 +66,33 @@ public class DateUtil {
         Calendar calendar=new GregorianCalendar();
         calendar.setTime(date);
         return calendar;
+    }
+
+    public static String getDateStringOfLatestISOWeekday(String base,Integer isoWeekday){
+        Date today = Date2StringAdapter.toDate(base);
+        while (true){
+            if (getISOWeekday(today).equals(isoWeekday)){
+                return Date2StringAdapter.toString(today);
+            }
+            today = getDateBefore(today,1);
+        }
+    }
+    public static List<String> getAllDateStringsBetweenNowAndLatestISOWeekday(String base,Integer isoWeekday){
+        Date today = Date2StringAdapter.toDate(base);
+        LinkedList<String> days = new LinkedList<String>();
+        days.addFirst(getToday());
+        while (true){
+            if (getISOWeekday(today).equals(isoWeekday)){
+                break;
+            }
+            today = getDateBefore(today,1);
+            days.addFirst(Date2StringAdapter.toString(today));
+        }
+
+        return days;
+    }
+
+    public static String getNowDateTime(){
+        return new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").format(new java.util.Date());
     }
 }

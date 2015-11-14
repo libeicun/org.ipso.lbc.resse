@@ -12,8 +12,8 @@
     <title>管理员</title>
     <script src="json2.js" type="text/javascript"></script>
     <script src="prototype-1.6.0.3.js" type="text/javascript"></script>
-    <link href="SpryAccordion.css" rel="stylesheet" type="text/css"/>
-    <link href="SpryCollapsiblePanel.css" rel="stylesheet" type="text/css"/>
+    <link href="resource/css/SpryAccordion.css" rel="stylesheet" type="text/css"/>
+    <link href="resource/css/SpryCollapsiblePanel.css" rel="stylesheet" type="text/css"/>
 
 </head>
 <body>

@@ -6,16 +6,16 @@
 
 package org.ipso.lbc.common.dao;
 
-import org.ipso.lbc.common.adm.User;
 import org.ipso.lbc.common.domain.Student;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class DAOStudentTest {
 
-    DAOStudent daoStu= DAOFactoryMain.getInstance().getDaoStudent();
+    DAOStudent daoStu= DAOFactoryLocal.getInstance().getDaoStudent();
     @Test
     public void testInsertOrUpdate() throws Exception {
 

@@ -6,6 +6,8 @@
 
 package org.ipso.lbc.resseorg.action;
 
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class UpdateLessonRecordActionTest {
@@ -13,10 +15,16 @@ public class UpdateLessonRecordActionTest {
     @org.junit.Test
     public void testExecute() throws Exception {
         UpdateLessonRecordAction action = new UpdateLessonRecordAction();
-        action.setName("李倍");
         action.setInfo("");
         action.setMinutes(0);
         action.setTimes(0);
+        action.execute();
+    }
+
+    @Test
+    public void testApprove() throws Exception {
+        UpdateLessonRecordAction action = new UpdateLessonRecordAction();
+        action.setName("李倍存");
         action.execute();
     }
 }

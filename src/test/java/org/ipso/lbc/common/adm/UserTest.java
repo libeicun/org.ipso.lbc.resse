@@ -6,21 +6,17 @@
 
 package org.ipso.lbc.common.adm;
 
-import org.ipso.lbc.common.dao.DAOUser;
-import org.ipso.lbc.common.db.DAOFactory;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class UserTest {
 
     @Test
     public void testSetPassword() throws Exception {
-        DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
-        daoUser.insertOrUpdate(new User("admin","admin"));
-        UserUtils.setPassword(daoUser,"admin","admin");
-        daoUser.insertOrUpdate(new User("1512302009","lbc"));
-
+//        DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
+//        daoUser.insertOrUpdate(new User("admin","admin"));
+//        UserUtils.setPassword(daoUser,"admin","admin");
+//        daoUser.insertOrUpdate(new User("1512302009","lbc"));
+        User user = new User("","123456");
+        System.err.println(user.getPassword());
     }
 }
