@@ -22,7 +22,7 @@
     <script type="text/javascript">
         function doRegister() {
 
-            var url = '/resse-1.0/ajax_use_json/registerGeneralInfo.action';
+            var url = '/resse-1.1/ajax_use_json/registerGeneralInfo.action';
 
             var params = Form.serialize('register');
             var myAjax = new Ajax.Request(url,
@@ -48,15 +48,7 @@
 <body>
 <h1 style="text-align: center;width:100%;">此页面用于通用的信息汇总</h1>
 <form id="register">
-
     <p style="color: red;">请研151班的同学，在此页面提供如下信息，用于制作班级花名册。</p>
-    <p style="color: red;font-weight: bold;">
-        对于数据丢失的事件，开发者表示非常抱歉，浪费了每人3分钟的宝贵时间来重新提交数据。<br>
-        为了避免再次发生类似事情，采取了措施：<br>
-            （1）自动备份数据库；<br>
-            （2）同时将信息保存到日志文件；<br>
-        唉，亏啊<br>
-    </p>
     <p class="pnote">请键入您的学号。</p>
     <input type="text" name="id"/><br>
     <p class="pnote">姓名</p>

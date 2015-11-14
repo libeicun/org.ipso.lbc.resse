@@ -36,7 +36,7 @@
 
         function doChangeRecord() {
 
-            var url = '/resse-1.0/ajax_use_json/updateLessonRecord.action';
+            var url = '/resse-1.1/ajax_use_json/updateLessonRecord.action';
 
             document.getElementById("minutes").value = g_minutes;
 
