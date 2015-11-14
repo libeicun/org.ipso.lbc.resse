@@ -6,20 +6,13 @@
 
 package org.ipso.lbc.common.action;
 
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-import org.apache.struts2.ServletActionContext;
 import org.ipso.lbc.common.adm.UserUtils;
 import org.ipso.lbc.common.dao.DAOUser;
 import org.ipso.lbc.common.exception.handler.ExceptionInfoPrintingHelper;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
-import org.ipso.lbc.resseorg.dao.DAOLessonRecord;
-import org.ipso.lbc.resseorg.domain.LessonRecord;
-
-import javax.servlet.ServletContext;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
  /**
   * 信息：李倍存 创建于 2015/10/24 21:24。电邮 1174751315@qq.com。<br>
@@ -58,7 +51,7 @@ import java.util.Date;
      @Override
      public String execute() throws Exception {
          try {
-             DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
+             DAOUser daoUser = DAOFactoryLocal.getInstance().getDaoUser();
 
              Subject user = SecurityUtils.getSubject();
 

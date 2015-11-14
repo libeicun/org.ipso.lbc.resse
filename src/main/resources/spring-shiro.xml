@@ -44,6 +44,7 @@
         <property name="globalSessionTimeout" value="3600000"/>
         <property name="sessionIdCookieEnabled" value="true"/>
         <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -64,7 +65,7 @@
         <!--<property name="dataSource" ref="accessDataSource"/>-->
         <!--<property name="credentialsMatcher" ref="md5CredentialsMatcher"/>-->
     <!--</bean>-->
-    <bean id="myJdbcRealm" class="org.ipso.lbc.common.shiro.MyJdbcRealm">
+    <bean id="myJdbcRealm" class="org.ipso.lbc.common.shiro.MyJdbcRealmWithEmptyPasswordAndMd5">
         <property name="name" value = "LBC"/>
         <property name="credentialsMatcher" ref="md5CredentialsMatcher"/>
     </bean>
@@ -80,6 +81,9 @@
         <property name="hashAlgorithmName" value="MD5"/>
         <property name="storedCredentialsHexEncoded" value="true"/>
     </bean>
-
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <property name="name" value="your.cookie"/>
+        <property name="path" value="/"/>
+    </bean>
     <bean id="myLogoutFilter" class="org.ipso.lbc.common.shiro.LogoutFilterWithoutRedirect"/>
 </beans>

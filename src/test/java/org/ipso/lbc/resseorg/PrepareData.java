@@ -8,12 +8,12 @@ package org.ipso.lbc.resseorg;
 
 import org.ipso.lbc.common.adm.User;
 import org.ipso.lbc.common.adm.UserRole;
-import org.ipso.lbc.common.adm.UserUtils;
 import org.ipso.lbc.common.dao.DAOStudent;
 import org.ipso.lbc.common.dao.DAOUser;
 import org.ipso.lbc.common.dao.DAOUserRole;
 import org.ipso.lbc.common.domain.Student;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
 /**
  * 信息：李倍存 创建于 2015/10/24 21:45。电邮 1174751315@qq.com。<br>
@@ -25,9 +25,9 @@ public class PrepareData {
 
     @org.junit.Test
     public void doPrepare() throws Exception {
-        DAOUser daoUser = DAOFactoryMain.getInstance().getDaoUser();
-        DAOStudent daoStudent = DAOFactoryMain.getInstance().getDaoStudent();
-        DAOUserRole daoUserRole = DAOFactoryMain.getInstance().getDaoUserRole();
+        DAOUser daoUser = DAOFactoryLocal.getInstance().getDaoUser();
+        DAOStudent daoStudent = DAOFactoryLocal.getInstance().getDaoStudent();
+        DAOUserRole daoUserRole = DAOFactoryLocal.getInstance().getDaoUserRole();
 
         String id = "1512302009";
         String pass = "lbc";

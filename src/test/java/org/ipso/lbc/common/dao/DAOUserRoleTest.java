@@ -7,13 +7,14 @@
 package org.ipso.lbc.common.dao;
 
 import org.ipso.lbc.common.adm.UserRole;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
 import static org.junit.Assert.*;
 
 public class DAOUserRoleTest {
 
-    DAOUserRole daoUserRole = DAOFactoryMain.getInstance().getDaoUserRole();
+    DAOUserRole daoUserRole = DAOFactoryLocal.getInstance().getDaoUserRole();
     @org.junit.Test
     public void testInsertOrUpdate() throws Exception {
 

@@ -7,6 +7,7 @@
 
 package org.ipso.lbc.common.ado;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -36,4 +37,14 @@ public class ConvertUtils {
         }
         return dest;
     }
+
+    public static <T> List<T>  toList(T[] array){
+        List<T> list = new LinkedList<T>();
+        for (int i = 0; i < array.length; i++) {
+            list.add(array[i]);
+        }
+
+        return list;
+    }
+
 }

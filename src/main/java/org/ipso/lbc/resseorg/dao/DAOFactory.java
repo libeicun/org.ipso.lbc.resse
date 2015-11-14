@@ -19,32 +19,13 @@ import java.util.Map;
  * 信息：李倍存 创建于 2015/10/19 11:32。电邮 1174751315@qq.com。<br>
  * 说明：
  */
-public class DAOFactoryMain {
-    private static DAOFactoryMain instance = new DAOFactoryMain();
-
-    public static DAOFactoryMain getInstance() {
-        return instance;
-    }
-
-
-    private SuperDAO superDAO;
-
+public abstract class DAOFactory {
+    protected SuperDAO superDAO;
     public SuperDAO getSuperDAO() {
         return superDAO;
     }
 
-    private DAOFactoryMain() {
-        SuperDAO superDAO = SuperDAO.getInstanceOf(eDbType.MAIN);
-
-        daos.put("user",new DAOUser(superDAO));
-        daos.put("user-role",new DAOUserRole(superDAO));
-        daos.put("student",new DAOStudent(superDAO));
-        daos.put("lesson-record",new DAOLessonRecord(superDAO));
-        this.superDAO = superDAO;
-    }
-
-    private Map<String,Object> daos = new HashMap<String, Object>();
-
+    protected Map<String,Object> daos = new HashMap<String, Object>();
 
     public DAOUser getDaoUser(){
         return (DAOUser) daos.get("user");

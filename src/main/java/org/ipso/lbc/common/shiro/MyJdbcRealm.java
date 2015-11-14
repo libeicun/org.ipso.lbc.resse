@@ -15,13 +15,10 @@ import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.apache.shiro.util.JdbcUtils;
 import org.ipso.lbc.common.db.dao.SuperDAO;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -33,7 +30,7 @@ import java.util.Set;
  * 说明：
  */
 public class MyJdbcRealm extends JdbcRealm {
-    private static SuperDAO superDAO= DAOFactoryMain.getInstance().getSuperDAO();
+    protected static SuperDAO superDAO= DAOFactoryLocal.getInstance().getSuperDAO();
     public MyJdbcRealm() {
 
     }
@@ -90,7 +87,7 @@ public class MyJdbcRealm extends JdbcRealm {
         return info;
     }
 
-    private String[] getPasswordForUser(String username) throws SQLException {
+    protected String[] getPasswordForUser(String username) throws SQLException {
         String[] result;
         boolean returningSeparatedSalt = false;
         switch (saltStyle) {

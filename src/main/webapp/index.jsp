@@ -19,7 +19,11 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>
-        欢迎<shiro:hasRole name="adm">, 管理员</shiro:hasRole>
+        欢迎
+        <shiro:hasRole name="adm">，管理员</shiro:hasRole>
+        <shiro:hasRole name="2015">，2015级</shiro:hasRole>
+        <shiro:hasRole name="2014">，2014级</shiro:hasRole>
+        <shiro:hasRole name="2013">，2013级</shiro:hasRole>
     </title>
 
         <script src="resource/js/SpryMenuBar.js" type="text/javascript"></script>
@@ -31,14 +35,14 @@
 <body>
 
 <ul id="main-menu" class="MenuBarHorizontal">
-    <li><a class="MenuBarItemSubmenu" href="#"><shiro:user><shiro:principal/></shiro:user><shiro:guest>访问更多功能</shiro:guest></a>
+    <li><a class="MenuBarItemSubmenu" href="#"><shiro:user><shiro:principal/></shiro:user><shiro:guest>访问我的功能</shiro:guest></a>
         <ul>
             <shiro:user>
-                <li class="menu-a"><a  onclick="go('manage/user/change-password.jsp');">修改密码</a></li>
-                <li class="menu-a"><a  href="logout">退出登录</a></li>
+                <shiro:hasRole name="adm"><li class="menu-a"><a  onclick="go('manage/user/change-password.jsp');">修改密码</a></li></shiro:hasRole>
+                <li class="menu-a"><a  href="logout">退出</a></li>
             </shiro:user>
             <shiro:guest>
-                <li class="menu-a"><a   href="login.jsp">请登录</a></li>
+                <li class="menu-a"><a   href="login.jsp">请提供您的工号</a></li>
             </shiro:guest>
 
         </ul>
@@ -46,7 +50,12 @@
 
     <li><a class="MenuBarItemSubmenu" href="#">日常</a>
         <ul>
-            <li class="menu-a"><a   onclick="go('apps/lesson-record/lesson-record.jsp');">课程登记</a></li>
+            <shiro:hasRole name="2015">
+                <li class="menu-a"><a   onclick="go('apps/lesson-record/lesson-record.jsp');">课程登记</a></li>
+            </shiro:hasRole>
+            <shiro:user>
+                <li class="menu-a"><a   onclick="go('apps/lesson-record/day-off-or-business-trip.jsp')">出差/请假登记</a> </li>
+            </shiro:user>
             <li class="menu-a"><a   onclick="go('apps/general-register/general-register.jsp');">通用汇总</a></li>
         </ul>
     </li>

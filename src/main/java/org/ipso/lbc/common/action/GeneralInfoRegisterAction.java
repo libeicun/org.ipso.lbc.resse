@@ -6,13 +6,11 @@
 
 package org.ipso.lbc.common.action;
 
-import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import org.ipso.lbc.common.db.dao.SuperDAO;
 import org.ipso.lbc.common.exception.handler.ExceptionInfoPrintingHelper;
-import org.ipso.lbc.common.utils.ResourcePathHelper;
-import org.ipso.lbc.common.utils.python.PythonProcessHelper;
-import org.ipso.lbc.resseorg.dao.DAOFactoryMain;
+import org.ipso.lbc.resseorg.dao.DAOFactory;
+import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
 
 /**
  * 信息：李倍存 创建于 2015/11/3 15:31。电邮 1174751315@qq.com。<br>
@@ -45,7 +43,7 @@ public class GeneralInfoRegisterAction  extends CommonAjaxAction{
     @Override
     public String execute() throws Exception {
         try{
-            SuperDAO superDAO = DAOFactoryMain.getInstance().getSuperDAO();
+            SuperDAO superDAO = DAOFactoryLocal.getInstance().getSuperDAO();
             String sqlDel = "DELETE FROM GENERAL_INFO where UID = ?";
             String sqlIns = "INSERT INTO GENERAL_INFO(UID,NAME,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13,P14) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
             superDAO.excuteUpdate(sqlDel,id);
