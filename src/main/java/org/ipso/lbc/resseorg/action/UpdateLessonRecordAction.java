@@ -18,7 +18,9 @@ import org.ipso.lbc.common.utils.DateUtil;
 import org.ipso.lbc.common.utils.datetime.SimpleTime;
 import org.ipso.lbc.common.utils.datetime.SimpleTimePeriod;
 import org.ipso.lbc.resseorg.dao.*;
+import org.ipso.lbc.resseorg.domain.BusinessTripRecord;
 import org.ipso.lbc.resseorg.domain.CardTimeRecord;
+import org.ipso.lbc.resseorg.domain.IPsoEmployee;
 import org.ipso.lbc.resseorg.domain.LessonRecord;
 
 import java.text.SimpleDateFormat;
@@ -158,14 +160,14 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
          this.code6 = code6;
      }
 
-     @Override
-    public String execute() throws Exception {
+
+    public String executeUpdateLessonRecord() throws Exception {
         try {
-            DAOStudent daoStudent = DAOFactoryLocal.getInstance().getDaoStudent();
-            DAOLessonRecord daoLessonRecord = DAOFactoryLocal.getInstance().getDaoLessonRecord();
+            DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT.getInstance().getDaoIPsoEmployee();
+            DAOLessonRecord daoLessonRecord = DAOFactoryHWATT.getInstance().getDaoLessonRecord();
             Subject user = SecurityUtils.getSubject();
             if (user.isAuthenticated()){
-                this.name = daoStudent.query(user.getPrincipal().toString()).getStudentName();
+                this.name = user.getPrincipal().toString();
                 System.err.println(DateUtil.getNowDateTime()+" "+ServletActionContext.getRequest().getRemoteHost() + " 【登录】之后访问。");
             } else{
                 System.err.println(DateUtil.getNowDateTime()+" "+ServletActionContext.getRequest().getRemoteHost() + " 【未登录】的访问。");
@@ -176,7 +178,7 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
                 System.err.println(DateUtil.getNowDateTime()+"===================>");
                 System.err.println(overlapInfo);
                 System.err.println("<======================================");
-                return warn("检测到：某些上课时段与刷脸记录时段重叠，如下：\n\n "+overlapInfo + "\n在取消选中这些上课之前，将不会提交您的登记信息。\n\n");
+                return warn("未能提交您的信息!\n\n检测到：某些上课时段与刷脸记录时段重叠，如下：\n\n "+overlapInfo + "\n在解决这些冲突之前，将不会提交您的登记信息。\n\n");
             }
 
 
@@ -213,19 +215,47 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
             return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
         }
     }
+     public String executeRegisterBusinessTrip() throws Exception {
+         try {
 
+             Subject user = SecurityUtils.getSubject();
+             if (user.isAuthenticated()){
+                 this.name = user.getPrincipal().toString();
+             }
+
+             List<String> days = DateUtil.getAllDateStringsInThisWeek();
+             List<List<SimpleTimePeriod>> selections = getAllPeriodInWebPage(days);
+             DAOBusinessTripRecord daoBusinessTripRecord = DAOFactoryHWATT.getInstance().getDaoBusinessTripRecord();
+             DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT.getInstance().getDaoIPsoEmployee();
+
+             IPsoEmployee employee = daoiPsoEmployee.query(name);
+             if (employee==null){
+                 return warn("没有找到您的信息。");
+             }
+
+             for (int i = 0; i < selections.size(); i++) {
+                 List<SimpleTimePeriod> simpleTimePeriods = selections.get(i);
+                 for (int j = 0; j < simpleTimePeriods.size(); j++) {
+                     SimpleTimePeriod period = simpleTimePeriods.get(j);
+                     BusinessTripRecord record = new BusinessTripRecord(employee.getEmployeeID(),name,days.get(i),period,DateUtil.getToday());
+                     daoBusinessTripRecord.insertOrUpdate(record);
+                 }
+             }
+             return SUCCESS;
+         } catch (Exception e) {
+             return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
+         }
+     }
 
      private static String[] weekdays = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
-     private static String[] weekdaysTimePeriods = {"上午1大节","上午2大节","下午","晚间"};
      private String today = DateUtil.getToday();
+     List<String> daysFormMondayToNow = DateUtil.getAllDateStringsBetweenNowAndLatestISOWeekday(today,1);
+
      public String getOverlapInfo(){
 
-         List<String> daysFormMondayToNow = DateUtil.getAllDateStringsBetweenNowAndLatestISOWeekday(today,1);
          List<List<SimpleTimePeriod>> inDatabase = getAllPeriodsInDatabase(daysFormMondayToNow);
          List<List<SimpleTimePeriod>> inWebPage  = getAllPeriodInWebPage(daysFormMondayToNow);
-         String overlapsInfo = getOverlapInfo(daysFormMondayToNow,inDatabase,inWebPage);
-
-        return overlapsInfo;
+        return getOverlapInfo(daysFormMondayToNow,inDatabase,inWebPage);
     }
 
      private String getOverlapInfo(List<String> days, List<List<SimpleTimePeriod>> period1, List<List<SimpleTimePeriod>> period2){

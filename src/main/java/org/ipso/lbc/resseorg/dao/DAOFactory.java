@@ -40,4 +40,7 @@ public abstract class DAOFactory {
     public DAOLessonRecord getDaoLessonRecord(){
         return (DAOLessonRecord) daos.get("lesson-record");
     }
+    public DAOBusinessTripRecord getDaoBusinessTripRecord(){ return (DAOBusinessTripRecord) daos.get("business-trip-record"); }
+    public DAODayOffRecord getDaoDayOffRecord(){ return (DAODayOffRecord) daos.get("day-off-record");}
+    public DAOIPsoEmployee getDaoIPsoEmployee(){ return (DAOIPsoEmployee) daos.get("iPso-employee");}
 }

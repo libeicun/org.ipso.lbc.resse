@@ -9,14 +9,13 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.ipso.lbc.resseorg.domain.LessonRecord" table="LessonRecords">
+    <class name="org.ipso.lbc.resseorg.domain.BusinessTripRecord" table="BusinessTripRecords">
         <composite-id>
-            <key-property name="studentId" column="Identifier"/>
-            <key-property name="name" column="Name"/>
+            <key-property name="employeeId" column="EmployeeId"/>
+            <key-property name="startTime" column="StartTime"/>
+            <key-property name="endTime" column="EndTime"/>
         </composite-id>
-        <property name="minutesToAdd" column="MinutesAdded"/>
-        <property name="lateTimesToSubtract" column="LateTimesSubbed"/>
-        <property name="info" column="Info"/>
-        <property name="updateTime" column="UpdateTime"/>
+        <property name="name" column="Name"/>
+        <property name="updateDate" column="UpdateDate"/>
     </class>
 </hibernate-mapping>

@@ -17,13 +17,13 @@
 
 
     <package name="ajax" extends="json-default" namespace="/ajax_use_json">
-        <action name="updateLessonRecord" class="org.ipso.lbc.resseorg.action.UpdateLessonRecordAction" method="execute">
+        <action name="updateLessonRecord" class="org.ipso.lbc.resseorg.action.UpdateLessonRecordAction" method="executeUpdateLessonRecord">
             <result type="json"/>
         </action>
         <action name="registerDayOff" class="org.ipso.lbc.resseorg.action.RegisterDayOffAction" method="execute">
             <result type="json"/>
         </action>
-        <action name="registerBusinessTrip" class="org.ipso.lbc.resseorg.action.RegisterBusinessTripAction" method="execute">
+        <action name="registerBusinessTrip" class="org.ipso.lbc.resseorg.action.UpdateLessonRecordAction" method="executeRegisterBusinessTrip">
             <result type="json"/>
         </action>
         <action name="changePassword" class="org.ipso.lbc.common.action.ChangePasswordAction" method="execute">

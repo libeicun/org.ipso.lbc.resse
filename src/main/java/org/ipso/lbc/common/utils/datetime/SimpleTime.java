@@ -97,5 +97,8 @@ public class SimpleTime {
     }
 
 
+    public String toString(){
+        return hour+":"+minute+":"+second;
+    }
 
 }

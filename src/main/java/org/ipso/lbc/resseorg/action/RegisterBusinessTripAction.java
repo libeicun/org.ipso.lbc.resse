@@ -18,6 +18,10 @@ import java.util.List;
   */
  public class RegisterBusinessTripAction extends CommonAjaxAction {
 
+     private String start,end;
+     private String startDate;
+     private String startTime;
+     private String endDate;
 
      public RegisterBusinessTripAction() {
      }
@@ -37,8 +41,6 @@ import java.util.List;
      }
 
 
-     private Integer minutes;
-     private Integer times;
      private String id = "UNSPECIFIED";
      private String info = "";
      private List<String> timesSegments = new LinkedList<String>();
@@ -83,22 +85,6 @@ import java.util.List;
      }
 
 
-
-     public Integer getMinutes() {
-         return minutes;
-     }
-
-     public void setMinutes(Integer minutes) {
-         this.minutes = minutes;
-     }
-
-     public Integer getTimes() {
-         return times;
-     }
-
-     public void setTimes(Integer times) {
-         this.times = times;
-     }
 
 
 

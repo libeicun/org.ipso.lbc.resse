@@ -15,7 +15,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" align="center">
-                        <a>请键入您的学号或工号，以便访问特定于您的身份的内容。</a>
+                        <a>请键入您的工号，以便访问特定于您的身份的内容。</a>
                     </div>
                     <div class="panel-body">
                         <form name="loginform" action="" method="POST" accept-charset="UTF-8" role="form">
@@ -32,7 +32,7 @@
                                     <%--</label>--%>
                                 <%--</div>--%>
                                 <input class="btn btn-lg btn-success btn-block" type="submit" value="进入">
-                                <div style="width: 100%;text-align: center"> <a href="">我不知道我的工号是什么。</a></div>
+                                <div style="width: 100%;text-align: center"> <a href="#">我不知道我的工号是什么。</a></div>
                             </fieldset>
                         </form>
                     </div>

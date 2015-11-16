@@ -91,8 +91,32 @@ public class DateUtil {
 
         return days;
     }
+    public static List<String> getAllDateStringsBetweenNowAndNewestISOWeekday(String base,Integer isoWeekday){
+        Date today = Date2StringAdapter.toDate(base);
+        LinkedList<String> days = new LinkedList<String>();
+        days.add(getToday());
+        while (true){
+            if (getISOWeekday(today).equals(isoWeekday)){
+                break;
+            }
+            today = getDateAfter(today, 1);
+            days.add(Date2StringAdapter.toString(today));
+        }
+
+        return days;
+    }
+    public static List<String> getAllDateStringsInThisWeek(){
+
+        List<String> before = getAllDateStringsBetweenNowAndLatestISOWeekday(getToday(),1);
+        List<String> after = getAllDateStringsBetweenNowAndNewestISOWeekday(getToday(),7);
+        after.remove(0);
+        before.addAll(after);
+
+        return before;
+
+    }
 
     public static String getNowDateTime(){
-        return new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").format(new java.util.Date());
+        return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new java.util.Date());
     }
 }

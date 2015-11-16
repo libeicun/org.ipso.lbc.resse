@@ -32,6 +32,10 @@ public class DAOFactoryHWATT extends DAOFactory{
         this.superDAO = superDAO;
 
         daos.put("card-time",new DAOCardTimeRecord(superDAO));
+        daos.put("iPso-employee",new DAOIPsoEmployee(superDAO));
+        daos.put("lesson-record",new DAOLessonRecord(superDAO));
+        daos.put("business-trip-record",new DAOBusinessTripRecord(superDAO));
+        daos.put("day-off-record",new DAODayOffRecord(superDAO));
     }
 
     public DAOCardTimeRecord createDaoCardTimeRecord(){

@@ -20,14 +20,15 @@
         <property name="filters">
             <map>
                 <entry key="myLogout" value-ref="myLogoutFilter"/>
+                <entry key="myAuthc" value-ref="myFormAuthFilter"/>
             </map>
         </property>
         <property name="filterChainDefinitions">
             <value>
                 /logout = logout
-                /adm_home.jsp = authc, roles[adm]
+                /adm_home.jsp = myAuthc, roles[adm]
                 /ajax_use_json/* = anon
-                /login.jsp = authc
+                /login.jsp = myAuthc
                 /apps/* = anon
             </value>
         </property>
@@ -66,7 +67,7 @@
         <!--<property name="credentialsMatcher" ref="md5CredentialsMatcher"/>-->
     <!--</bean>-->
     <bean id="myJdbcRealm" class="org.ipso.lbc.common.shiro.MyJdbcRealmWithEmptyPasswordAndMd5">
-        <property name="name" value = "LBC"/>
+        <property name="name" value = "default"/>
         <property name="credentialsMatcher" ref="md5CredentialsMatcher"/>
     </bean>
     <bean id="accessDataSource" class="org.ipso.lbc.common.ucanaccess.MyDataSource">
@@ -86,4 +87,5 @@
         <property name="path" value="/"/>
     </bean>
     <bean id="myLogoutFilter" class="org.ipso.lbc.common.shiro.LogoutFilterWithoutRedirect"/>
+    <bean id="myFormAuthFilter" class="org.ipso.lbc.resseorg.shiro.MyFormAuthenicationFilter"/>
 </beans>

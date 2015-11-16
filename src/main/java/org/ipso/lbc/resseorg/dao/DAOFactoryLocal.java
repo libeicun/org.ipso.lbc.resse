@@ -31,6 +31,10 @@ public class DAOFactoryLocal extends DAOFactory{
         daos.put("user-role",new DAOUserRole(superDAO));
         daos.put("student",new DAOStudent(superDAO));
         daos.put("lesson-record",new DAOLessonRecord(superDAO));
+        daos.put("business-trip-record",new DAOBusinessTripRecord(superDAO));
+        daos.put("day-off-record",new DAODayOffRecord(superDAO));
+
+
         this.superDAO = superDAO;
     }
 }

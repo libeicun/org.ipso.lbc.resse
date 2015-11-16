@@ -9,14 +9,10 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="org.ipso.lbc.resseorg.domain.LessonRecord" table="LessonRecords">
-        <composite-id>
-            <key-property name="studentId" column="Identifier"/>
-            <key-property name="name" column="Name"/>
-        </composite-id>
-        <property name="minutesToAdd" column="MinutesAdded"/>
-        <property name="lateTimesToSubtract" column="LateTimesSubbed"/>
-        <property name="info" column="Info"/>
-        <property name="updateTime" column="UpdateTime"/>
+    <class name="org.ipso.lbc.resseorg.domain.IPsoEmployee" table="KQZ_Employee">
+        <id name="employeeID" column="EmployeeID">
+            <generator class="assigned"/>
+        </id>
+        <property name="EmployeeName" column="EmployeeName"/>
     </class>
 </hibernate-mapping>

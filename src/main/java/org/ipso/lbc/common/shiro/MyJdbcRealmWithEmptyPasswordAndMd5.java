@@ -34,7 +34,7 @@ public class MyJdbcRealmWithEmptyPasswordAndMd5 extends MyJdbcRealm {
 
             char[] password = upToken.getPassword();
             if (password == null){
-                upToken.setPassword(new String("default").toCharArray());
+                upToken.setPassword(("default").toCharArray());
             }
 
 
