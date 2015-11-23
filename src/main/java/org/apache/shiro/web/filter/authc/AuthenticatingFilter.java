@@ -48,14 +48,11 @@ public abstract class AuthenticatingFilter extends AuthenticationFilter {
                     "must be created in order to execute a login attempt.";
             throw new IllegalStateException(msg);
         }
-        System.out.print("    " + token.getPrincipal() + " executeLogin, ");
         try {
             Subject subject = getSubject(request, response);
             subject.login(token);
-            System.out.println("SUCCESS.");
             return onLoginSuccess(token, subject, request, response);
         } catch (AuthenticationException e) {
-            System.out.println("FAILED.");
             return onLoginFailure(token, e, request, response);
         }
     }

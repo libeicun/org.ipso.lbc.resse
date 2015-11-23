@@ -36,8 +36,6 @@ public class MyJdbcRealm extends JdbcRealm {
     }
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        System.out.print("        doGetAuthenticationInfo："  + (token.toString()+"\n"));
-
         UsernamePasswordToken upToken = (UsernamePasswordToken) token;
         String username = upToken.getUsername();
 
@@ -126,7 +124,6 @@ public class MyJdbcRealm extends JdbcRealm {
             throw new AuthorizationException("PrincipalCollection method argument cannot be null.");
         }
 
-        System.out.print("        doGetAuthorizationInfo："  + (principals.toString()+"\n"));
 
         String username = (String) getAvailablePrincipal(principals);
 

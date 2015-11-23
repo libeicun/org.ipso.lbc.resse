@@ -13,10 +13,10 @@
         <composite-id>
             <key-property name="employeeId" column="EmployeeId"/>
             <key-property name="updateDate" column="UpdateDate"/>
+            <key-property name="startTime" column="StartTime"/>
+            <key-property name="endTime" column="EndTime"/>
         </composite-id>
         <property name="name" column="Name"/>
-        <property name="startTime" column="StartTime"/>
-        <property name="endTime" column="EndTime"/>
         <property name="reason" column="Reason"/>
     </class>
 </hibernate-mapping>

@@ -27,8 +27,6 @@
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
         <property name="show_sql">false</property>
-        <mapping resource="org/ipso/lbc/resseorg/domain/CardTimeRecord.hbm.xml"/>
-        <mapping resource="org/ipso/lbc/resseorg/domain/IPsoEmpoyee.hbm.xml"/>
         <mapping resource="org/ipso/lbc/resseorg/domain/BusinessTripRecord.hbm.xml"/>
         <mapping resource="org/ipso/lbc/resseorg/domain/LessonRecord.hbm.xml"/>
         <mapping resource="org/ipso/lbc/resseorg/domain/DayOffRecord.hbm.xml"/>

@@ -27,4 +27,12 @@ public class DAOBusinessTripRecord extends AbstractDAO {
         superDAO.insertOrUpdate(record);
     }
 
+    public List<BusinessTripRecord> queryByNameBetweenTime(String name, String startDate, String endDate){
+        List list =  superDAO.query("from BusinessTripRecord where name=? and startTime>? and endTime<? order by startTime asc",name,startDate,endDate);
+        List<BusinessTripRecord> businessTripRecords = new LinkedList<BusinessTripRecord>();
+        for (int i = 0; i < list.size(); i++) {
+            businessTripRecords.add((BusinessTripRecord)list.get(i));
+        }
+        return businessTripRecords;
+    }
 }

@@ -15,13 +15,13 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" align="center">
-                        <a>请键入您的工号，以便访问特定于您的身份的内容。</a>
+                        <a>请键入您的工号或姓名，以便访问特定于您的身份的内容。</a>
                     </div>
                     <div class="panel-body">
                         <form name="loginform" action="" method="POST" accept-charset="UTF-8" role="form">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="在此输入工号" name="username" type="text">
+                                    <input class="form-control" placeholder="在此输入工号或姓名" name="username" type="text">
                                 </div>
                                 <div style="display: none">
                                     <input class="form-control" placeholder="在此输入密码" name="password" type="password" value="123456">

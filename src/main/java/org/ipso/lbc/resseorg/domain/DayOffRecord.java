@@ -19,6 +19,9 @@ public class DayOffRecord implements Serializable {
     private String endTime;
     private String reason;
 
+    public DayOffRecord() {
+    }
+
     public DayOffRecord(Integer employeeId, String name, String startTime, String endTime, String reason, String updateDate) {
         this.employeeId = employeeId;
         this.endTime = endTime;

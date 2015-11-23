@@ -8,6 +8,7 @@ package org.ipso.lbc.common.aop;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.ipso.lbc.common.utils.ResourcePathHelper;
 
 import java.net.URL;
 
@@ -19,11 +20,11 @@ public class Logging {
     /**
      * log4j配置文件路径。
      */
-    private String res = "classpath:log.properties";
+    private String res = ResourcePathHelper.getAbsolutePath("") + "log.properties";
     /**
      * log4j配置文件URL，来自res。
      */
-    private URL cfgFileRes = Logging.class.getResource(res);
+
     private static Logging instance = new Logging();
 
     private Logging() {
