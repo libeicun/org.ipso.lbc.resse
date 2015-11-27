@@ -6,17 +6,11 @@
 
 package org.ipso.lbc.resseorg.shiro;
 
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
-import org.ipso.lbc.common.exception.AppUnCheckException;
-import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT;
-import org.ipso.lbc.resseorg.domain.IPsoEmployee;
 import org.ipso.lbc.resseorg.utils.IPsoUserHelper;
 
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
 /**
  * 信息：李倍存 创建于 2015/11/16 13:06。电邮 1174751315@qq.com。<br>
@@ -41,8 +35,8 @@ public class MyFormAuthenicationFilter extends FormAuthenticationFilter {
     @Override
     protected String getUsername(ServletRequest request) {
 
-        String userName = WebUtils.getCleanParam(request, getUsernameParam());
-        return IPsoUserHelper.getEmployeeName(userName,"ISO-8859-1","UTF-8");
+        String userName = IPsoUserHelper.getEmployeeName(WebUtils.getCleanParam(request, getUsernameParam()),"ISO-8859-1","UTF-8");
+        return userName;
 
     }
 }

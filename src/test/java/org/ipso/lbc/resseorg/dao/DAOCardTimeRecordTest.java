@@ -10,14 +10,12 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class DAOCardTimeRecordTest {
 
     @Test
     public void testQueryByName() throws Exception {
 
-        DAOCardTimeRecord daoCardTimeRecord = DAOFactoryHWATT.getInstance().createDaoCardTimeRecord();
+        DAOCardTimeRecord daoCardTimeRecord = DAOFactoryHWATT_RW.getInstance().createDaoCardTimeRecord();
         List records = daoCardTimeRecord.queryByName("李倍存");
 
         records = daoCardTimeRecord.queryByNameBetweenTime("甘一夫","2015-11-11 00:00:00","2015-11-11 23:59:59");

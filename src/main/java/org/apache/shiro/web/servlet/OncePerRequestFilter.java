@@ -18,10 +18,6 @@
  */
 package org.apache.shiro.web.servlet;
 
-import org.apache.shiro.web.filter.authc.AnonymousFilter;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.apache.shiro.web.filter.authz.AuthorizationFilter;
-import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +25,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -111,12 +106,6 @@ public abstract class OncePerRequestFilter extends NameableFilter {
      */
     public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
-        if (this instanceof FormAuthenticationFilter || this instanceof AnonymousFilter || this instanceof RolesAuthorizationFilter){
-            System.out.println("    "+((HttpServletRequest)request).getRequestURL() + " Filtering " + this.getClass().getSimpleName());
-        }
-
-
         String alreadyFilteredAttributeName = getAlreadyFilteredAttributeName();
         if ( request.getAttribute(alreadyFilteredAttributeName) != null ) {
             log.trace("Filter '{}' already executed.  Proceeding without invoking this filter.", getName());

@@ -8,11 +8,9 @@ package org.ipso.lbc.resseorg.dao;
 
 import org.ipso.lbc.resseorg.domain.IPsoEmployee;
 
-import static org.junit.Assert.*;
-
 public class DAOIPsoEmployeeTest {
 
-    DAOFactoryHWATT daoFactory = DAOFactoryHWATT.getInstance();
+    DAOFactoryHWATT_RW daoFactory = DAOFactoryHWATT_RW.getInstance();
     DAOIPsoEmployee daoiPsoEmployee = daoFactory.getDaoIPsoEmployee();
 
 

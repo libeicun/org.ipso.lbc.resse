@@ -34,10 +34,11 @@
 
 <body>
 <ul id="main-menu" class="MenuBarHorizontal">
-    <li><a class="MenuBarItemSubmenu" href="#"><shiro:user><shiro:principal/></shiro:user><shiro:guest>访问我的功能</shiro:guest></a>
+    <li><a class="MenuBarItemSubmenu" href="#"><shiro:user><shiro:principal/></shiro:user><shiro:guest>登录</shiro:guest></a>
         <ul>
             <shiro:user>
                 <shiro:hasRole name="adm"><li class="menu-a"><a  onclick="go('manage/user/change-password.jsp');">修改密码</a></li></shiro:hasRole>
+                <li class="menu-a"><a  onclick="go('start.jsp')">查看我的摘要</a></li>
                 <li class="menu-a"><a  href="logout">退出</a></li>
             </shiro:user>
             <shiro:guest>

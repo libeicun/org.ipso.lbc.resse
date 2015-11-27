@@ -7,8 +7,10 @@
 package org.ipso.lbc.common.shiro;
 
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.ipso.lbc.common.aop.Logging;
 
 /**
  * 信息：李倍存 创建于 2015/11/8 9:54。电邮 1174751315@qq.com。<br>
@@ -27,17 +29,21 @@ public class MyJdbcRealmWithEmptyPasswordAndMd5 extends MyJdbcRealm {
 //        return result;
 //    }
 
+
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-            UsernamePasswordToken upToken = (UsernamePasswordToken) token;
-            String username = upToken.getUsername();
+        UsernamePasswordToken upToken = (UsernamePasswordToken) token;
+        String username = upToken.getUsername();
 
-            char[] password = upToken.getPassword();
-            if (password == null){
-                upToken.setPassword(("default").toCharArray());
-            }
+        char[] password = upToken.getPassword();
+        if (password == null){
+            upToken.setPassword(("default").toCharArray());
+        }
 
 
-            return new SimpleAuthenticationInfo(username, (new Md5Hash(upToken.getPassword())).toHex().toCharArray(), getName());
+        Logger logger = Logging.instance().createLogger(this.getClass().getSimpleName());
+        logger.info( username + " 从 " + ((UsernamePasswordToken) token).getHost() + " 登录（免密码）");
+
+        return new SimpleAuthenticationInfo(username, (new Md5Hash(upToken.getPassword())).toHex().toCharArray(), getName());
     }
 }

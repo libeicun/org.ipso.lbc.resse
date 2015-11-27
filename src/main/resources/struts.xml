@@ -36,6 +36,16 @@
                 <param name="ignoreHierarchy">false</param>
             </result>
         </action>
+        <action name="showWeeklySummaryInfo" class="org.ipso.lbc.resseorg.action.ShowWeeklySumaryInfoAction" method="executePersonal">
+            <result type="json">
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
+        <action name="showWeeklySummaryInfoStatics" class="org.ipso.lbc.resseorg.action.ShowWeeklySumaryInfoAction" method="executeStatics">
+            <result type="json">
+                <param name="ignoreHierarchy">false</param>
+            </result>
+        </action>
     </package>
     <package name="general" extends="struts-default" namespace="/general">
 

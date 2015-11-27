@@ -43,4 +43,5 @@ public abstract class DAOFactory {
     public DAOBusinessTripRecord getDaoBusinessTripRecord(){ return (DAOBusinessTripRecord) daos.get("business-trip-record"); }
     public DAODayOffRecord getDaoDayOffRecord(){ return (DAODayOffRecord) daos.get("day-off-record");}
     public DAOIPsoEmployee getDaoIPsoEmployee(){ return (DAOIPsoEmployee) daos.get("iPso-employee");}
+    public DAOWeeklySummary getDaoWeeklySummary(){ return (DAOWeeklySummary) daos.get("weekly-summary");}
 }

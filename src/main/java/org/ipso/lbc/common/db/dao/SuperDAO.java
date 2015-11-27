@@ -63,7 +63,7 @@ public class SuperDAO {
         if (db == eDbType.MAIN) {
             SuperDAO dao = instances.get("main");
             if (dao == null) {
-                dao = instances.put("main", new SuperDAO(new Configuration().configure("hibernate.cfg.main.xml").setProperty("hibernate.connection.url", "jdbc:access:///" + ResourcePathHelper.getAbsolutePath("DATA/main.accdb")).buildSessionFactory()));
+                dao = instances.put("main", new SuperDAO(new Configuration().configure("hibernate.cfg.main.xml").buildSessionFactory()));
 
             }
             dao = instances.get("main");

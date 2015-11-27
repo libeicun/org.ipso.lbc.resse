@@ -12,11 +12,12 @@ import org.ipso.lbc.common.action.CommonAjaxAction;
 import org.ipso.lbc.common.exception.handler.ExceptionInfoPrintingHelper;
 import org.ipso.lbc.common.utils.DateUtil;
 import org.ipso.lbc.resseorg.dao.DAODayOffRecord;
-import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT;
-import org.ipso.lbc.resseorg.dao.DAOFactoryLocal;
+import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT_RO;
+import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT_RW;
 import org.ipso.lbc.resseorg.dao.DAOIPsoEmployee;
 import org.ipso.lbc.resseorg.domain.DayOffRecord;
 import org.ipso.lbc.resseorg.domain.IPsoEmployee;
+import org.ipso.lbc.resseorg.utils.ErrorHelper;
 
  /**
   * 信息：李倍存 创建于 2015/10/24 21:24。电邮 1174751315@qq.com。<br>
@@ -112,7 +113,7 @@ import org.ipso.lbc.resseorg.domain.IPsoEmployee;
          this.startTime = startTime;
      }
 
-     private String startDate="",startTime="",endDate="",endTime="";
+     private String startDate="",startTime="08:00:00",endDate="",endTime="22:00:00";
 
 
      @Override
@@ -120,8 +121,8 @@ import org.ipso.lbc.resseorg.domain.IPsoEmployee;
          try {
              Subject user = SecurityUtils.getSubject();
 
-             DAODayOffRecord daoDayOffRecord = DAOFactoryHWATT.getInstance().getDaoDayOffRecord();
-             DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT.getInstance().getDaoIPsoEmployee();
+             DAODayOffRecord daoDayOffRecord = DAOFactoryHWATT_RW.getInstance().getDaoDayOffRecord();
+             DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT_RO.getInstance().getDaoIPsoEmployee();
              IPsoEmployee employee;
              if (user.isAuthenticated()){
                  employee = daoiPsoEmployee.query(user.getPrincipal().toString());
@@ -141,7 +142,6 @@ import org.ipso.lbc.resseorg.domain.IPsoEmployee;
              return SUCCESS;
          } catch (Exception e) {
 
-             return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
-         }
+             return ErrorHelper.actionError(e, this);         }
      }
  }

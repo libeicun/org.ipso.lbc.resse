@@ -6,7 +6,8 @@
 
 package org.ipso.lbc.resseorg.utils;
 
-import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT;
+import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT_RO;
+import org.ipso.lbc.resseorg.dao.DAOFactoryHWATT_RW;
 import org.ipso.lbc.resseorg.domain.IPsoEmployee;
 
 import java.nio.charset.Charset;
@@ -16,7 +17,9 @@ import java.nio.charset.Charset;
  * 说明：
  */
 public class IPsoUserHelper {
-    private static DAOFactoryHWATT daoFactoryHWATT = DAOFactoryHWATT.getInstance();
+
+
+    private static DAOFactoryHWATT_RO daoFactoryHWATTRO = DAOFactoryHWATT_RO.getInstance();
     public static String getEmployeeName(String employeeIdOrName,String srcEncoding,String targetEncoding){
         try {
             Integer id = Integer.valueOf(employeeIdOrName);
@@ -28,7 +31,7 @@ public class IPsoUserHelper {
     }
 
     public static String getEmployeeName(Integer employeeId){
-        IPsoEmployee employee = daoFactoryHWATT.getDaoIPsoEmployee().query(employeeId);
+        IPsoEmployee employee = daoFactoryHWATTRO.getDaoIPsoEmployee().query(employeeId);
         if (employee==null){
             return "invalid";
         }

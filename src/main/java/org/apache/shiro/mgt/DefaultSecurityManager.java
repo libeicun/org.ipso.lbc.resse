@@ -349,8 +349,6 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //Added in 1.2:
         save(subject);
 
-
-
         return subject;
     }
 

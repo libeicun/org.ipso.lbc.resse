@@ -10,7 +10,9 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/LOG/info.log" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/main/resources/log.properties" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/src/main/webapp/login.jsp" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/resource/jscalendar-1.0/lang/calendar-zh.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/target/resse-1.1/login.jsp" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/target/resse-1.1/resource/jscalendar-1.0/lang/calendar-zh.js" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
