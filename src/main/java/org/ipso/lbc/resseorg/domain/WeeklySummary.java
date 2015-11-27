@@ -7,6 +7,7 @@
 package org.ipso.lbc.resseorg.domain;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * 信息：李倍存 创建于 2015/11/20 16:15。电邮 1174751315@qq.com。<br>
@@ -88,4 +89,18 @@ public class WeeklySummary implements Serializable{
     public void setTotalTime(Float totalTime) {
         this.totalTime = totalTime;
     }
+
+    public static class MyComparator implements java.util.Comparator<WeeklySummary>{
+        @Override
+        public int compare(WeeklySummary weeklySummary, WeeklySummary t1) {
+            if (weeklySummary.getTotalTime()>t1.getTotalTime()){
+                return -1;
+            }
+            else if (weeklySummary.getTotalTime()<t1.getTotalTime()){
+                return 1;
+            }
+            return 0;
+        }
+    }
+
 }

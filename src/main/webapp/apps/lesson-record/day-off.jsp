@@ -26,7 +26,7 @@
     <script src="../../resource/js/jtimer.js" type="text/javascript"></script>
     <style type="text/css">@import url(../../resource/jscalendar-1.0/calendar-system.css);</style>
     <script type="text/javascript" src="../../resource/jscalendar-1.0/calendar.js"></script>
-    <script type="text/javascript" src="../../resource/jscalendar-1.0/lang/calendar-en.js"></script>
+    <script type="text/javascript" src="../../resource/jscalendar-1.0/lang/calendar-zh.js" charset="GBK"></script>
     <script type="text/javascript" src="../../resource/jscalendar-1.0/calendar-setup.js"></script>
 
     <script type="text/javascript">

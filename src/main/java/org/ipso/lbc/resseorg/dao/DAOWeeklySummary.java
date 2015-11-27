@@ -61,6 +61,6 @@ public class DAOWeeklySummary extends AbstractDAO {
 
     public static String DOCTOR = "博士", TUTOR = "老师", G2013 = "2013", G2014 = "2014", G2015 = "2015";
     private static String hql(String t){
-        return "from WeeklySummary where grade like '"+t+"%' order by percentage asc";
+        return "from WeeklySummary where grade like '"+t+"%'";
     }
 }

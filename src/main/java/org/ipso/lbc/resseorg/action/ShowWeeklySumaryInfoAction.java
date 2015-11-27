@@ -13,6 +13,8 @@ import org.ipso.lbc.resseorg.dao.*;
 import org.ipso.lbc.resseorg.domain.*;
 import org.ipso.lbc.resseorg.utils.ErrorHelper;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,12 +35,19 @@ public class ShowWeeklySumaryInfoAction extends CommonAjaxAction {
     public String executeStatics() throws Exception {
         try {
             name = ShiroFacade.getCurrentUserName();
+            WeeklySummary.MyComparator comparator =new WeeklySummary.MyComparator();
+
             DAOWeeklySummary daoWeeklySummary = DAOFactoryHWATT_RO.getInstance().getDaoWeeklySummary();
             List<WeeklySummary> summariesOfTutors = daoWeeklySummary.query(DAOWeeklySummary.TUTOR);
             List<WeeklySummary> summariesOfDoctors = daoWeeklySummary.query(DAOWeeklySummary.DOCTOR);
             List<WeeklySummary> summariesOf2013s = daoWeeklySummary.query(DAOWeeklySummary.G2013);
             List<WeeklySummary> summariesOf2014s = daoWeeklySummary.query(DAOWeeklySummary.G2014);
             List<WeeklySummary> summariesOf2015s = daoWeeklySummary.query(DAOWeeklySummary.G2015);
+            Collections.sort(summariesOfTutors,comparator);
+            Collections.sort(summariesOfDoctors,comparator);
+            Collections.sort(summariesOf2013s,comparator);
+            Collections.sort(summariesOf2014s,comparator);
+            Collections.sort(summariesOf2015s,comparator);
             summariesOfAll.addAll(summariesOfTutors);
             summariesOfAll.addAll(summariesOfDoctors);
             summariesOfAll.addAll(summariesOf2013s);
