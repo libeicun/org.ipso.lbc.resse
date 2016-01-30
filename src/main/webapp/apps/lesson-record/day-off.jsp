@@ -24,8 +24,13 @@
     <script src="../../resource/js/json2.js" type="text/javascript"></script>
     <script src="../../resource/js/prototype-1.6.0.3.js" type="text/javascript"></script>
     <script src="../../resource/js/jtimer.js" type="text/javascript"></script>
+    <style type="text/css">@import url(../../resource/jscalendar-1.0/calendar-system.css);</style>
+    <script type="text/javascript" src="../../resource/jscalendar-1.0/calendar.js"></script>
+    <script type="text/javascript" src="../../resource/jscalendar-1.0/lang/calendar-zh.js" charset="GBK"></script>
+    <script type="text/javascript" src="../../resource/jscalendar-1.0/calendar-setup.js"></script>
+
     <script type="text/javascript">
-         function doChangeRecord() {
+        function doChangeRecord() {
             var url = '/resse-1.1/ajax_use_json/registerDayOff.action';
 
 
@@ -58,14 +63,43 @@
     <p class = "pnote">请键入请假理由。</p>
     <s:textarea name="reason"/><br><br>
     <p class = "pnote">请选择开始时间。</p>
-    日期：<input type="text" name="startDate" placeholder="格式：2015-01-01">， 时间：<input type="text" name="startTime" placeholder="格式：08:00"><br><br>
+    <input type="text" id="startDate" name="startDate">
+    <div id="start"></div>
     <p class = "pnote">请选择结束时间。</p>
-    日期：<input type="text" name="endDate" placeholder="格式：2015-01-01">， 时间：<input type="text" name="endTime" placeholder="格式：22:00"><br><br>
+    <input type="text" id="endDate" name="endDate">
+    <div id="end"></div>
 
 
     <input type="button" style="font-size: medium;font-style: oblique;background-color: #005695;color: #ffffff;" value="提交您的信息" onclick="doChangeRecord();"/>
 
+
 </form>
 
+<script type="text/javascript">
+    function installFlatCalendar() {
+        var parentStart = document.getElementById("start");
+        var parentEnd   = document.getElementById("end");
+        // hide week numbers
+        calStart.weekNumbers = false;
+        calStart.setDateFormat("%Y-%m-%d");
+        calStart.create(parentStart);
+        calStart.show();
+        calEnd.weekNumbers = false;
+        calEnd.setDateFormat("%Y-%m-%d");
+        calEnd.create(parentEnd);
+        calEnd.show();
+    }
+    function flatSelected(cal, date){
+        if(cal == calStart ){
+            document.getElementById("startDate").value = date;
+        }
+        if(cal == calEnd){
+            document.getElementById("endDate").value = date;
+        }
+    }
+    var calStart = new Calendar(0, null, flatSelected);
+    var calEnd   = new Calendar(0, null, flatSelected);
+    installFlatCalendar();
+</script>
 </body>
 </html>

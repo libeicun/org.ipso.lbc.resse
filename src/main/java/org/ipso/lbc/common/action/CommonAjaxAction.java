@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public abstract class CommonAjaxAction extends ActionSupport{
     public CommonAjaxAction() {
     }
-    protected String warn(String info){
+    public String warn(String info){
         setWarningInfo(info);
         return SUCCESS;
     }

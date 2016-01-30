@@ -19,12 +19,9 @@
 package org.apache.shiro.web.servlet;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.mgt.*;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.ExecutionException;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ThreadContext;
 import org.apache.shiro.web.filter.mgt.FilterChainResolver;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.mgt.WebSecurityManager;
@@ -353,10 +350,7 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
     protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse, final FilterChain chain)
             throws ServletException, IOException {
 
-
-
         Throwable t = null;
-
 
         try {
             final ServletRequest request = prepareServletRequest(servletRequest, servletResponse, chain);
@@ -364,23 +358,9 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
 
             final Subject subject = createSubject(request, response);
 
-
-//            ThreadContext.bind(subject);
-//            System.out.println("    Thread: " + Thread.currentThread().getId());
-//            System.out.println("    subject.execute " + (subject.isAuthenticated() ? subject.getPrincipal().toString() + ", Authenticated." : ", anon"));
-//            updateSessionLastAccessTime(request, response);
-//            executeChain(request, response, chain);
-
-
-//            System.out.println("Login: " + Thread.currentThread().getId());
-//            subject.login(new UsernamePasswordToken("1512302009","admin"));
             //noinspection unchecked
-
-
             subject.execute(new Callable() {
                 public Object call() throws Exception {
-                    System.out.println("Thread: " + Thread.currentThread().getName());
-                    System.out.println("    subject.execute " + (subject.isAuthenticated() ? subject.getPrincipal().toString() + ", Authenticated." : ", anon"));
                     updateSessionLastAccessTime(request, response);
                     executeChain(request, response, chain);
                     return null;

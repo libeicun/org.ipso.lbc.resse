@@ -48,20 +48,20 @@
 <body>
 <h1 style="text-align: center;width:100%;">此页面用于通用的信息汇总</h1>
 <form id="register">
-    <p style="color: red;">请研151班的同学，在此页面提供如下信息，用于制作班级花名册。</p>
-    <p class="pnote">请键入您的学号。</p>
+    <p style="color: red;">请在此页面提供如下信息，用于统计电车相关信息。</p>
+    <p class="pnote">请键入您的研究生学号。</p>
     <input type="text" name="id"/><br>
     <p class="pnote">姓名</p>
     <input type="text" name="name"/><br>
 
-    <p class="pnote">专业</p>
+    <p class="pnote">若您本科在广西大学就读，请提供本科学号</p>
     <input value="" type="text" name="p0"/><br>
-    <p class="pnote">导师</p>
+    <p class="pnote">电动车型号及颜色</p>
     <input value=""  type="text" name="p1"/><br>
-    <p class="pnote">联系电话</p>
+    <p class="pnote">车牌号</p>
     <input value=""  type="text" name="p2"/><br>
-    <p class="pnote">宿舍</p>
-    <input value=""  type="text" name="p3"/><br>
+    <%--<p class="pnote">宿舍</p>--%>
+    <%--<input value=""  type="text" name="p3"/><br>--%>
     <%--<p class="pnote">信息字段4。</p>--%>
     <%--<input value="TEST4"  type="text" name="p4"/><br>--%>
     <%--<p class="pnote">信息字段5。</p>--%>

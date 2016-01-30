@@ -70,13 +70,15 @@
         <property name="name" value = "default"/>
         <property name="credentialsMatcher" ref="md5CredentialsMatcher"/>
     </bean>
-    <bean id="accessDataSource" class="org.ipso.lbc.common.ucanaccess.MyDataSource">
-        <property name="accessPath">
-            <value>classpath:DATA/main.accdb</value>
-        </property>
-        <property name="user" value=""/>
-        <property name="password" value=""/>
-    </bean>
+
+
+    <!--<bean id="accessDataSource" class="org.ipso.lbc.common.ucanaccess.MyDataSource">-->
+        <!--<property name="accessPath">-->
+            <!--<value>classpath:DATA/main.accdb</value>-->
+        <!--</property>-->
+        <!--<property name="user" value=""/>-->
+        <!--<property name="password" value=""/>-->
+    <!--</bean>-->
 
     <bean id="md5CredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="MD5"/>

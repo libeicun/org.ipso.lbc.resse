@@ -9,8 +9,10 @@ package org.ipso.lbc.resseorg.dao;
 import org.ipso.lbc.common.adm.UserRole;
 import org.ipso.lbc.common.db.dao.AbstractDAO;
 import org.ipso.lbc.common.db.dao.SuperDAO;
+import org.ipso.lbc.resseorg.domain.CardTimeRecord;
 import org.ipso.lbc.resseorg.domain.LessonRecord;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,5 +34,14 @@ public class DAOLessonRecord extends AbstractDAO {
         }
         return (LessonRecord)records.get(0);
 
+    }
+
+    public List<LessonRecord> queryByNameBetweenTime(String name, String timeStart, String timeEnd){
+        List list =  superDAO.query("from LessonRecord where name=? and updateTime>? and updateTime<? order by updateTime asc",name,timeStart,timeEnd);
+        List<LessonRecord> records = new LinkedList<LessonRecord>();
+        for (int i = 0; i < list.size(); i++) {
+            records.add((LessonRecord) list.get(i));
+        }
+        return records;
     }
 }

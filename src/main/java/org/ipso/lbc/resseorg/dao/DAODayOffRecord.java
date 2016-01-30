@@ -9,7 +9,11 @@ package org.ipso.lbc.resseorg.dao;
 import org.ipso.lbc.common.db.dao.AbstractDAO;
 import org.ipso.lbc.common.db.dao.SuperDAO;
 import org.ipso.lbc.resseorg.domain.BusinessTripRecord;
+import org.ipso.lbc.resseorg.domain.CardTimeRecord;
 import org.ipso.lbc.resseorg.domain.DayOffRecord;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 信息：李倍存 创建于 2015/10/19 11:24。电邮 1174751315@qq.com。<br>
@@ -23,5 +27,12 @@ public class DAODayOffRecord extends AbstractDAO {
     public void insertOrUpdate(DayOffRecord record){
         superDAO.insertOrUpdate(record);
     }
-
+    public List<DayOffRecord> queryByNameBetweenTime(String name, String startDate, String endDate){
+        List list =  superDAO.query("from DayOffRecord where name=? and startTime>? and endTime<? order by startTime asc",name,startDate,endDate);
+        List<DayOffRecord> records = new LinkedList<DayOffRecord>();
+        for (int i = 0; i < list.size(); i++) {
+            records.add((DayOffRecord) list.get(i));
+        }
+        return records;
+    }
 }

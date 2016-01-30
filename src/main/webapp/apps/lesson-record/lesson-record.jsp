@@ -121,9 +121,6 @@
             document.getElementById("showTimes").innerHTML = g_times;
             document.getElementById("showMinutes").innerHTML = g_minutes;
         }
-
-
-
     </script>
 </head>
 
@@ -202,6 +199,11 @@
         <br><p class="pnote">请键入您的姓名。</p>
         <input type="text" name="name" id="name"><br>
     </shiro:guest>
+    <shiro:hasRole name="noc">
+        <br><p class="pnote">请键入您的姓名。</p>
+        <input type="text" name="name" id="name"><br>
+        <input type="text" name="doNotCheckOverlap" id="doNotCheckOverlap" value="true" style="display: none"><br>
+    </shiro:hasRole>
 
     <br><p class = "pnote">请键入您需要告知的更多信息。</p><input type="text"  name="info" placeholder="如：19-22日请假。或留空。"/><br>
     <input type="text" name="minutes" id="minutes" style="display: none"><br>

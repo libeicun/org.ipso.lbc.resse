@@ -6,14 +6,15 @@
 
 package org.ipso.lbc.resseorg.action;
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.ipso.lbc.common.action.CommonAjaxAction;
 import org.ipso.lbc.common.ado.ConvertUtils;
-import org.ipso.lbc.common.dao.DAOStudent;
+import org.ipso.lbc.common.aop.Logging;
 import org.ipso.lbc.common.exception.AppUnCheckException;
-import org.ipso.lbc.common.exception.handler.ExceptionInfoPrintingHelper;
 import org.ipso.lbc.common.utils.DateUtil;
 import org.ipso.lbc.common.utils.datetime.SimpleTime;
 import org.ipso.lbc.common.utils.datetime.SimpleTimePeriod;
@@ -22,6 +23,7 @@ import org.ipso.lbc.resseorg.domain.BusinessTripRecord;
 import org.ipso.lbc.resseorg.domain.CardTimeRecord;
 import org.ipso.lbc.resseorg.domain.IPsoEmployee;
 import org.ipso.lbc.resseorg.domain.LessonRecord;
+import org.ipso.lbc.resseorg.utils.ErrorHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,6 +49,16 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
      private String info = "";
 
      private Integer code0=0,code1=0,code2=0,code3=0,code4=0,code5=0,code6=0;
+
+     public Boolean getDoNotCheckOverlap() {
+         return doNotCheckOverlap;
+     }
+
+     public void setDoNotCheckOverlap(Boolean doNotCheckOverlap) {
+         this.doNotCheckOverlap = doNotCheckOverlap;
+     }
+
+     private Boolean doNotCheckOverlap = false;
 
 
      public String getWarning() {
@@ -163,29 +175,28 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
 
     public String executeUpdateLessonRecord() throws Exception {
         try {
-            DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT.getInstance().getDaoIPsoEmployee();
-            DAOLessonRecord daoLessonRecord = DAOFactoryHWATT.getInstance().getDaoLessonRecord();
+            DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT_RO.getInstance().getDaoIPsoEmployee();
+            DAOLessonRecord daoLessonRecord = DAOFactoryHWATT_RW.getInstance().getDaoLessonRecord();
             Subject user = SecurityUtils.getSubject();
-            if (user.isAuthenticated()){
+            if (this.name.equals("UNSPECIFIED") && user.isAuthenticated()){
                 this.name = user.getPrincipal().toString();
-                System.err.println(DateUtil.getNowDateTime()+" "+ServletActionContext.getRequest().getRemoteHost() + " 【登录】之后访问。");
-            } else{
-                System.err.println(DateUtil.getNowDateTime()+" "+ServletActionContext.getRequest().getRemoteHost() + " 【未登录】的访问。");
             }
-
-            String overlapInfo = getOverlapInfo();
-            if (!overlapInfo.equals("")){
-                System.err.println(DateUtil.getNowDateTime()+"===================>");
-                System.err.println(overlapInfo);
-                System.err.println("<======================================");
-                return warn("未能提交您的信息!\n\n检测到：某些上课时段与刷脸记录时段重叠，如下：\n\n "+overlapInfo + "\n在解决这些冲突之前，将不会提交您的登记信息。\n\n");
-            }
-
 
             LessonRecord currentRecord = daoLessonRecord.queryByStudentName(this.name);
             if (currentRecord == null){
                 return warn("没有找到您的姓名，请联系纪委同学。");
             }
+
+            String overlapInfo = getOverlapInfo();
+            if (!overlapInfo.equals("")){
+                String err = new Md5Hash(ServletActionContext.getRequest().getRemoteHost()).toHex().substring(0,10) + "  试图违规登记\n" + overlapInfo;
+                Logger logger = Logging.instance().createLogger(this.getClass().getSimpleName());
+                logger.error(err);
+                return warn("未能提交您的信息!\n\n检测到：某些上课时段与刷脸记录时段重叠，如下：\n\n "+overlapInfo + "\n在解决这些冲突之前，将不会提交您的登记信息。\n\n");
+            }
+
+
+
 
 
 //            Student currentStudent = daoStudent.query(id);
@@ -212,9 +223,10 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
 //
             return SUCCESS;
         } catch (Exception e) {
-            return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
+            return ErrorHelper.actionError(e,this);
         }
     }
+
      public String executeRegisterBusinessTrip() throws Exception {
          try {
 
@@ -222,11 +234,14 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
              if (user.isAuthenticated()){
                  this.name = user.getPrincipal().toString();
              }
+             if (user.hasRole("2015")){
+
+             }
 
              List<String> days = DateUtil.getAllDateStringsInThisWeek();
              List<List<SimpleTimePeriod>> selections = getAllPeriodInWebPage(days);
-             DAOBusinessTripRecord daoBusinessTripRecord = DAOFactoryHWATT.getInstance().getDaoBusinessTripRecord();
-             DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT.getInstance().getDaoIPsoEmployee();
+             DAOBusinessTripRecord daoBusinessTripRecord = DAOFactoryHWATT_RW.getInstance().getDaoBusinessTripRecord();
+             DAOIPsoEmployee daoiPsoEmployee = DAOFactoryHWATT_RO.getInstance().getDaoIPsoEmployee();
 
              IPsoEmployee employee = daoiPsoEmployee.query(name);
              if (employee==null){
@@ -243,8 +258,7 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
              }
              return SUCCESS;
          } catch (Exception e) {
-             return warn("服务器软件发生未知错误，请联系李倍存。\n" + ExceptionInfoPrintingHelper.getStackTraceInfo(e));
-         }
+             return ErrorHelper.actionError(e, this);         }
      }
 
      private static String[] weekdays = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
@@ -252,7 +266,9 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
      List<String> daysFormMondayToNow = DateUtil.getAllDateStringsBetweenNowAndLatestISOWeekday(today,1);
 
      public String getOverlapInfo(){
-
+        if (doNotCheckOverlap){
+            return "";
+        }
          List<List<SimpleTimePeriod>> inDatabase = getAllPeriodsInDatabase(daysFormMondayToNow);
          List<List<SimpleTimePeriod>> inWebPage  = getAllPeriodInWebPage(daysFormMondayToNow);
         return getOverlapInfo(daysFormMondayToNow,inDatabase,inWebPage);
@@ -290,7 +306,7 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
      }
 
      private List<List<SimpleTimePeriod>> getAllPeriodsInDatabase(List<String> days){
-         DAOCardTimeRecord daoCardTimeRecord = DAOFactoryHWATT.getInstance().createDaoCardTimeRecord();
+         DAOCardTimeRecord daoCardTimeRecord = DAOFactoryHWATT_RO.getInstance().createDaoCardTimeRecord();
          List<List<CardTimeRecord>> records = new LinkedList<List<CardTimeRecord>>();
          List<List<SimpleTimePeriod>> recordsTimePeriods = new LinkedList<List<SimpleTimePeriod>>();
 
@@ -307,6 +323,8 @@ public class UpdateLessonRecordAction extends CommonAjaxAction {
              recordsTimePeriods.add(getPeriods(records.get(i)));
          }
         return recordsTimePeriods;
+
+
      }
      private List<List<SimpleTimePeriod>> getAllPeriodInWebPage(List<String> days){
 //         List<List<SimpleTimePeriod>> periodsInWebPage=new LinkedList<List<SimpleTimePeriod>>();

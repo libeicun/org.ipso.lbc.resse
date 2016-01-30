@@ -34,10 +34,25 @@
 
 <body>
 <ul id="main-menu" class="MenuBarHorizontal">
-    <li><a class="MenuBarItemSubmenu" href="#"><shiro:user><shiro:principal/></shiro:user><shiro:guest>访问我的功能</shiro:guest></a>
+    <li>
+        <a class="MenuBarItemSubmenu" href="#">
+            <shiro:user>
+                <shiro:hasPermission name="*">
+                    <shiro:hasRole name="noc">特权用户：免开挂检查</shiro:hasRole>
+                    <shiro:lacksRole name="noc"><shiro:principal/></shiro:lacksRole>
+                </shiro:hasPermission>
+                <shiro:lacksPermission name="*">
+                    <shiro:principal/>（非iPso雇员）
+                </shiro:lacksPermission>
+            </shiro:user>
+            <shiro:guest>登录</shiro:guest>
+        </a>
         <ul>
             <shiro:user>
                 <shiro:hasRole name="adm"><li class="menu-a"><a  onclick="go('manage/user/change-password.jsp');">修改密码</a></li></shiro:hasRole>
+                <shiro:lacksRole name="noc">
+                    <li class="menu-a"><a  onclick="go('start.jsp')">查看我的摘要</a></li>
+                </shiro:lacksRole>
                 <li class="menu-a"><a  href="logout">退出</a></li>
             </shiro:user>
             <shiro:guest>
@@ -49,22 +64,23 @@
 
     <li><a class="MenuBarItemSubmenu" href="#">日常</a>
         <ul>
-            <%--<shiro:hasRole name="2015">--%>
-                <li class="menu-a"><a   onclick="go('apps/lesson-record/lesson-record.jsp');">课程登记</a></li>
-            <%--</shiro:hasRole>--%>
-            <li class="menu-a"><a   onclick="go('apps/lesson-record/day-off-or-business-trip.jsp')">出差/请假登记</a> </li>
-            <li class="menu-a"><a   onclick="go('apps/general-register/general-register.jsp');">通用汇总</a></li>
+            <li class="menu-a"><a   onclick="go('apps/lesson-record/lesson-record.jsp');">课程登记</a></li>
+            <shiro:lacksRole name="noc">
+                <li class="menu-a"><a   onclick="go('apps/lesson-record/day-off-or-business-trip.jsp')">出差/请假登记</a> </li>
+                <li class="menu-a"><a   onclick="go('apps/general-register/general-register.jsp');">通用汇总</a></li>
+            </shiro:lacksRole>
         </ul>
     </li>
 
     <li><a class="MenuBarItemSubmenu" href="#">前往</a>
-
         <ul>
-<shiro:user>
-            <li class="menu-a"><a onclick="go('http://1.185.17.100/face/query.aspx');">刷脸统计</a></li>
-</shiro:user>
+            <shiro:user>
+                <li class="menu-a"><a onclick="go('http://1.185.17.100/face/query.aspx');">刷脸统计</a></li>
+            </shiro:user>
+            <shiro:hasRole name="lbc">
+                <li class="menu-a"><a onclick="go('apps/lbc/pic.jsp');">我的桌面</a></li>
+            </shiro:hasRole>
         </ul>
-
     </li>
 
     <shiro:hasRole name="adm">

@@ -44,8 +44,8 @@ public class GeneralInfoRegisterAction  extends CommonAjaxAction{
     public String execute() throws Exception {
         try{
             SuperDAO superDAO = DAOFactoryLocal.getInstance().getSuperDAO();
-            String sqlDel = "DELETE FROM GENERAL_INFO where UID = ?";
-            String sqlIns = "INSERT INTO GENERAL_INFO(UID,NAME,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13,P14) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            String sqlDel = "DELETE FROM GeneralInfo where UId = ?";
+            String sqlIns = "INSERT INTO GeneralInfo(UId,Name,P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12,P13,P14) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
             superDAO.excuteUpdate(sqlDel,id);
             superDAO.excuteUpdate(sqlIns,id,name, p0, p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14);
 

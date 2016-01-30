@@ -24,7 +24,6 @@ import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -131,7 +130,6 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
      * @since 1.0
      */
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-
         return onAccessDenied(request, response);
     }
 
@@ -226,9 +224,6 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
      */
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
         String loginUrl = getLoginUrl();
-
-        System.out.println("    " + ((HttpServletRequest)request).getRequestURL() + " redirectToLogin.");
-
         WebUtils.issueRedirect(request, response, loginUrl);
     }
 
